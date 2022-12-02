@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root to: "points#index"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :points, only: %i[index] do
+    resources :charging_stations, only: %i[index], shallow: true do
+      resources :connectors, only: %i[index], shallow: true
+    end
+  end 
+
+  resources :charging_sessions, only: %i[index show]
 end

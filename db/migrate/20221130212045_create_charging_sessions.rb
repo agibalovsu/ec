@@ -4,6 +4,7 @@ class CreateChargingSessions < ActiveRecord::Migration[7.0]
       t.integer :count_of_power, null: false
       t.references :connector, foreign_key: true
       t.references :client, foreign_key: true
+      t.references :point, foreign_key: true
 
       t.timestamps
     end
