@@ -1,0 +1,17 @@
+h1 = 'List of Sessions'
+- @charging_sessions.each do |charging_session|
+	p = "id - #{charging_session.id}"
+	p = "client name - #{charging_session.client.name}"
+	p = "location - #{charging_session.connector.charging_station.point.title}"
+	p = "connector type - #{charging_session.connector.connector_type}"
+	p = "start session - #{charging_session.created_at}"
+	p = "count_of_power - #{charging_session.count_of_power.round(2)} кW/h"	
+	- if 	charging_session.created_at != charging_session.updated_at
+		p = "connector condition - #{charging_session.change_condition_stop}"
+	- else
+		p = "connector condition - #{charging_session.change_condition_start}"
+
+h1 = 'Create new charging session'
+
+= render 'form'
+

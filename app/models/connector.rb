@@ -1,6 +1,6 @@
 class Connector < ApplicationRecord
 	belongs_to :charging_station
-	has_one :charging_session
+	has_one :charging_session, dependent: :destroy
 
 	validates :connector_type, inclusion: { in: %w(CHAdeMO CCS_COMBO_2 Type_2), 
 		message: "Valide connector_type is: 'CHAdeMO', 'CCS_COMBO_2', 'Type_2' "}

@@ -15,15 +15,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_212045) do
   enable_extension "plpgsql"
 
   create_table "charging_sessions", force: :cascade do |t|
-    t.integer "count_of_power", null: false
     t.bigint "connector_id"
     t.bigint "client_id"
-    t.bigint "point_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_charging_sessions_on_client_id"
     t.index ["connector_id"], name: "index_charging_sessions_on_connector_id"
-    t.index ["point_id"], name: "index_charging_sessions_on_point_id"
   end
 
   create_table "charging_stations", force: :cascade do |t|
@@ -61,7 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_212045) do
 
   add_foreign_key "charging_sessions", "clients"
   add_foreign_key "charging_sessions", "connectors"
-  add_foreign_key "charging_sessions", "points"
   add_foreign_key "charging_stations", "points"
   add_foreign_key "connectors", "charging_stations"
 end

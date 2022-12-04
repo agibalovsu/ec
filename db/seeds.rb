@@ -20,10 +20,11 @@ connectors = Connector.create!([
                      ])
 
 clients = Client.create!([
-                            {name: 'Pavel', phone_number: 845}
+                            {name: 'Pavel', phone_number: 111},
+                            {name: 'Vasily', phone_number: 777}
                         ])
 
 charging_sessions = ChargingSession.create!([
-                             {count_of_power: 30, client: clients[0], connector: connectors[0], point: points[0]},
+                             {client: clients[0], connector: connectors[0]},
                          ])
 

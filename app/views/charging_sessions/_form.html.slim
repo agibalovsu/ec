@@ -1,0 +1,13 @@
+= form_with model: @charging_session, local: true do |f|
+
+    = render 'shared/errors', resource: @charging_session
+
+    p
+      = f.label :client_id, 'Session Client'
+      = f.collection_select :client_id, Client.all, :id, :name, prompt: true
+    p
+      = f.label :connector_id, 'Session Connector'
+      = f.collection_select :connector_id, Connector.all, :id, :connector_type, prompt: true
+    p
+      = f.submit 'Start session'
+

@@ -1,20 +1,24 @@
 class ChargingSession < ApplicationRecord
 	belongs_to :client
 	belongs_to :connector
-	belongs_to :point
 
-	def start?
-		client.persisted? && connector.condition == 'free'
+	validates :connector_id, :client_id, presence: true
+
+	validate :validate_condition, on: :create
+
+	def change_condition_start
+		connector.condition = 'busy'
 	end
 
-	def start
-		if charging_session.start?
-			connector.condition == 'busy'
-		end
+	def change_condition_stop
+		connector.condition = 'free'
 	end
 
-	def stop
-		count_of_power = (charging_session.created_at - Time.now) * connector.power
-		connector.condition == 'free'
+	def count_of_power
+		((self.updated_at - self.created_at) * connector.power)/3600
 	end
+
+	def validate_condition
+    errors.add(connector.condition, 'condition must be free') if connector.condition != 'free'
+  end
 end

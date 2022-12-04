@@ -7,5 +7,9 @@ Rails.application.routes.draw do
     end
   end 
 
-  resources :charging_sessions, only: %i[index show]
+  resources :charging_sessions, only: %i[index show create] do
+    member do
+      post :stop
+    end
+  end
 end
