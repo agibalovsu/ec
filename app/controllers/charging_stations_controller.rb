@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 class ChargingStationsController < ApplicationController
-	before_action :find_point
+  before_action :find_point
 
-	def index
-		render json: @point.charging_stations, include: :connectors
-	end
+  def index
+    render json: @point.charging_stations, include: :connectors
+  end
 
-	private
+  private
 
-	def find_point
-		@point = Point.find(params[:point_id])
-	end
+  def find_point
+    @point = Point.find(params[:point_id])
+  end
 end

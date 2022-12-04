@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class Connector < ApplicationRecord
-	belongs_to :charging_station
-	has_one :charging_session, dependent: :destroy
+  belongs_to :charging_station
+  has_one :charging_session, dependent: :destroy
 
-	validates :connector_type, inclusion: { in: %w(CHAdeMO CCS_COMBO_2 Type_2), 
-		message: "Valide connector_type is: 'CHAdeMO', 'CCS_COMBO_2', 'Type_2' "}
+  validates :connector_type, inclusion: { in: %w[CHAdeMO CCS_COMBO_2 Type_2],
+                                          message: "Valide connector_type is: 'CHAdeMO', 'CCS_COMBO_2', 'Type_2' " }
 
-	validates :condition, inclusion: { in: %w(disable free busy), 
-		message: "Valid condition is: 'disable', 'free', 'busy'"}
+  validates :condition, inclusion: { in: %w[disable free busy],
+                                     message: "Valid condition is: 'disable', 'free', 'busy'" }
 end
