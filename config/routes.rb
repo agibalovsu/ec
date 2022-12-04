@@ -1,6 +1,17 @@
-Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+# frozen_string_literal: true
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+Rails.application.routes.draw do
+  root to: 'points#index'
+
+  resources :points, only: %i[index] do
+    resources :charging_stations, only: %i[index], shallow: true do
+      resources :connectors, only: %i[index], shallow: true
+    end
+  end
+
+  resources :charging_sessions, only: %i[index show create] do
+    member do
+      post :stop
+    end
+  end
 end
